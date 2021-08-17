@@ -1,0 +1,110 @@
+import dependencies.Dependencies
+import dependencies.Version
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: Dependencies.dependency
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.alnov.testapplication"
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+        versionCode Version.versionCode
+        versionName Version.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", '"https://min-api.cryptocompare.com/"'
+        buildConfigField "String", "API_KEY", '"0377b645534d613665813aec1f9d5afa4980955e898e15d095f343274673fe1d"'
+        buildConfigField "String", "BASE_URL_WEBSOCKET", '"wss://streamer.cryptocompare.com/v2"'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    packagingOptions {
+        pickFirst("META-INF/scarlet-core.kotlin_module")
+        pickFirst("META-INF/scarlet-core-internal.kotlin_module")
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dependencies {
+
+        //Android X
+        implementation Dependencies.AndroidX.appcompat
+        implementation Dependencies.AndroidX.materialDesign
+        implementation Dependencies.AndroidX.constraintlayout
+        implementation Dependencies.AndroidX.recyclerview
+        implementation Dependencies.AndroidX.legacySupport
+        implementation Dependencies.AndroidX.swipeRefresh
+
+        //Coil
+        implementation Dependencies.Coil.coil
+
+        //Coroutine
+        implementation Dependencies.Coroutine.coroutine
+        implementation Dependencies.Coroutine.coroutinesAndroidLibs
+
+        //Navigation
+        implementation Dependencies.Navigation.fragment
+        implementation Dependencies.Navigation.ui
+
+        //Retrofit
+        api Dependencies.Retrofit2.retrofit
+        api Dependencies.Retrofit2.converterGson
+
+        //OkHttp3
+        api Dependencies.OkHttp3.loggingInterceptor
+        api Dependencies.OkHttp3.okHttp3
+
+        //Koin
+        implementation Dependencies.Koin.koin
+
+        //Gson
+        implementation Dependencies.Gson.gson
+
+        //Scarlet
+        implementation Dependencies.Scarlet.scarlet
+        implementation Dependencies.Scarlet.messageAdapter
+        implementation Dependencies.Scarlet.streamAdapter
+        implementation Dependencies.Scarlet.websocket
+        implementation Dependencies.Scarlet.lifecycle
+
+        //LifeCycle
+        implementation Dependencies.Lifecycle.extension
+        implementation Dependencies.Lifecycle.livedata
+        implementation Dependencies.Lifecycle.viewmodel
+
+        //Shimmer
+        implementation Dependencies.Shimmer.shimmer
+
+        //Form validator
+        implementation Dependencies.Form.formValidator
+    }
+}
