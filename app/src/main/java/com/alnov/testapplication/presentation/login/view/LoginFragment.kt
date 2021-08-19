@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel by viewModel<LoginViewModel>()
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,19 +40,21 @@ class LoginFragment : Fragment() {
     }
 
     private fun setUpListener() {
-        with(binding) {
-            form {
-                inputLayout(textInputLayoutEmail) {
-                    assertNotEmpty()
-                    assertEmail()
-                }
-                inputLayout(textInputLayoutPassword) {
-                    assertNotEmpty()
-                }
-                submitWith(R.id.button_login) {
-                    if (it.success()) {
-                        viewModel.onUserLogin(editTextEmail.text.toString())
-                        navigateToWatchList()
+        binding?.let {
+            with(it) {
+                form {
+                    inputLayout(textInputLayoutEmail) {
+                        assertNotEmpty()
+                        assertEmail()
+                    }
+                    inputLayout(textInputLayoutPassword) {
+                        assertNotEmpty()
+                    }
+                    submitWith(R.id.button_login) {
+                        if (it.success()) {
+                            viewModel.onUserLogin(editTextEmail.text.toString())
+                            navigateToWatchList()
+                        }
                     }
                 }
             }

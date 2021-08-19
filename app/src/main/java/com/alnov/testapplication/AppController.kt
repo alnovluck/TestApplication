@@ -3,7 +3,7 @@ package com.alnov.testapplication
 import android.app.Application
 import com.alnov.testapplication.data.di.dataModule
 import com.alnov.testapplication.domain.di.domainModule
-import com.alnov.testapplication.domain.di.presentationModule
+import com.alnov.testapplication.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

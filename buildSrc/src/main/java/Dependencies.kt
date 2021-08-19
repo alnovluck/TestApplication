@@ -38,10 +38,6 @@ object Dependencies {
         const val shimmer = "com.facebook.shimmer:shimmer:${Version.shimmer}"
     }
 
-    object Coil {
-        const val coil = "io.coil-kt:coil:${Version.coil}"
-    }
-
     object Gson {
         const val gson = "com.google.code.gson:gson:${Version.gson}"
     }

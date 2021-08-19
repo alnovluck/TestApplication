@@ -1,4 +1,4 @@
-package com.alnov.testapplication.domain.di
+package com.alnov.testapplication.presentation.di
 
 import android.content.SharedPreferences
 import com.alnov.testapplication.presentation.main.viewmodel.MainActivityViewModel

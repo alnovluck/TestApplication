@@ -9,10 +9,4 @@ data class BaseResponse<T>(
     var data: T? = null,
     @SerializedName("Message")
     var message: String? = "",
-    @SerializedName("SponsoredData")
-    var sponsoredData: List<SponsoredDataResponse>? = null,
-    @SerializedName("RateLimit")
-    var rateLimit: RateLimitResponse? = null,
-    @SerializedName("HasWarning")
-    var hasWarning: Boolean? = false
 )

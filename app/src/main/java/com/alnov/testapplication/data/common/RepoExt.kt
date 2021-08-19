@@ -11,8 +11,8 @@ fun <Response, Model> SimpleResponse<Response>.mapToResult(mapper: Mapper<Respon
             val body = this.body()
             when {
                 body?.data != null -> {
-                    val mappedResult = mapper.mapFromResponse(body.data!!)
-                    Result.Success.Data<Model>(mappedResult)
+                    val mappedResult = mapper.mapFromResponse(body.data)
+                    Result.Success.Data(mappedResult)
                 }
                 body?.message.equals("Success") -> {
                     Result.Success.NoData

@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class WatchListFragment : Fragment() {
 
     private var _binding: FragmentWatchListBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private val viewModel by viewModel<WatchListViewModel>()
     private lateinit var adapter: WatchListAdapter
 
@@ -28,7 +28,7 @@ class WatchListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentWatchListBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,18 +41,20 @@ class WatchListFragment : Fragment() {
     }
 
     private fun setUpView() {
-        with(binding) {
-            recyclerViewCryptoData.addItemDecoration(
-                DividerItemDecoration(
-                    context,
-                    DividerItemDecoration.VERTICAL
+        binding?.let {
+            with(it) {
+                recyclerViewCryptoData.addItemDecoration(
+                    DividerItemDecoration(
+                        context,
+                        DividerItemDecoration.VERTICAL
+                    )
                 )
-            )
-            adapter = WatchListAdapter {
-                viewModel.fetchNextPage()
-                progressBarLoadMore.showSlideUp()
+                adapter = WatchListAdapter {
+                    viewModel.fetchNextPage()
+                    progressBarLoadMore.showSlideUp()
+                }
+                recyclerViewCryptoData.adapter = adapter
             }
-            recyclerViewCryptoData.adapter = adapter
         }
     }
 
@@ -65,11 +67,10 @@ class WatchListFragment : Fragment() {
             { data ->
                 stopShimmer()
                 viewModel.cryptoList.addAll(data)
-//                viewModel.updateDataLocal(data)
                 adapter.submitList(viewModel.cryptoList)
                 onFinishLoadData()
                 viewModel.onUpdatePageNumber()
-                binding.recyclerViewCryptoData.setVisible()
+                binding?.recyclerViewCryptoData?.setVisible()
             }, {
                 stopShimmer()
                 onFinishLoadData()
@@ -88,31 +89,31 @@ class WatchListFragment : Fragment() {
     }
 
     private fun onFinishLoadData() {
-        binding.progressBarLoadMore.hideSlideDown()
-        binding.pullToRefresh.isRefreshing = false
-        binding.textViewErrorMessage.showIf { viewModel.cryptoList.isNullOrEmpty() }
+        binding?.progressBarLoadMore?.hideSlideDown()
+        binding?.pullToRefresh?.isRefreshing = false
+        binding?.textViewErrorMessage?.showIf { viewModel.cryptoList.isNullOrEmpty() }
     }
 
     private fun onLoadData() {
         startShimmer()
-        binding.textViewErrorMessage.setGone()
-        binding.recyclerViewCryptoData.setGone()
+        binding?.textViewErrorMessage?.setGone()
+        binding?.recyclerViewCryptoData?.setGone()
     }
 
     private fun stopShimmer() {
-        binding.shimmerLoading.stopShimmer()
-        binding.shimmerLoading.setGone()
+        binding?.shimmerLoading?.stopShimmer()
+        binding?.shimmerLoading?.setGone()
     }
 
     private fun startShimmer() {
-        binding.shimmerLoading.setVisible()
-        binding.shimmerLoading.startShimmer()
+        binding?.shimmerLoading?.setVisible()
+        binding?.shimmerLoading?.startShimmer()
     }
 
     private fun setUpListener() {
-        binding.pullToRefresh.setOnRefreshListener {
-            binding.textViewErrorMessage.setGone()
-            binding.recyclerViewCryptoData.setGone()
+        binding?.pullToRefresh?.setOnRefreshListener {
+            binding?.textViewErrorMessage?.setGone()
+            binding?.recyclerViewCryptoData?.setGone()
             startShimmer()
             adapter.submitList(null)
             viewModel.refreshData()

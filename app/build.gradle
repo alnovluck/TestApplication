@@ -21,7 +21,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", '"https://min-api.cryptocompare.com/"'
-        buildConfigField "String", "API_KEY", '"0377b645534d613665813aec1f9d5afa4980955e898e15d095f343274673fe1d"'
+        buildConfigField "String", "API_KEY", '"ae2bd9d64d67c040572529c62ef668ac92a721364e0cad532cd6bfbe841b2c17"'
         buildConfigField "String", "BASE_URL_WEBSOCKET", '"wss://streamer.cryptocompare.com/v2"'
     }
 
@@ -63,9 +63,6 @@ android {
         implementation Dependencies.AndroidX.recyclerview
         implementation Dependencies.AndroidX.legacySupport
         implementation Dependencies.AndroidX.swipeRefresh
-
-        //Coil
-        implementation Dependencies.Coil.coil
 
         //Coroutine
         implementation Dependencies.Coroutine.coroutine

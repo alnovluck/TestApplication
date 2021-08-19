@@ -23,7 +23,7 @@ class WatchListAdapter(
     }
 
     override fun submitList(list: List<CryptoModel>?) {
-        super.submitList(if (list != null) list else null)
+        super.submitList(list)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

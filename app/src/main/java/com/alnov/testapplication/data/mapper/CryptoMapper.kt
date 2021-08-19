@@ -4,8 +4,8 @@ import com.alnov.testapplication.data.model.CryptoResponse
 import com.alnov.testapplication.domain.model.CryptoModel
 
 class CryptoMapper : Mapper<List<CryptoResponse>, List<CryptoModel>> {
-    override fun mapFromResponse(response: List<CryptoResponse>): List<CryptoModel> {
-        return response.map {
+    override fun mapFromResponse(response: List<CryptoResponse>?): List<CryptoModel> {
+        return response?.map {
             CryptoModel(
                 it.coinInfo.id,
                 it.coinInfo.name,
@@ -14,6 +14,6 @@ class CryptoMapper : Mapper<List<CryptoResponse>, List<CryptoModel>> {
                 it.raw.rawDetail.changeHour,
                 it.raw.rawDetail.changePCTHour
             )
-        }
+        } ?: listOf()
     }
 }

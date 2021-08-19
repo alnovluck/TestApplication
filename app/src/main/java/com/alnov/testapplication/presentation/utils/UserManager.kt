@@ -22,5 +22,6 @@ class UserManager(private val prefs: SharedPreferenceHelper) {
 
     fun endUserSession() {
         prefs.save(IS_USER_LOGIN, false)
+        prefs.remove(EMAIL)
     }
 }
